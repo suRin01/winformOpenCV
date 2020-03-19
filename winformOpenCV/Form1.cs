@@ -67,8 +67,7 @@ namespace winformOpenCV
             if (cam.IsDisposed)
             {
                 cam.Release();
-
-
+                
             }
         }
 
