@@ -1,0 +1,16 @@
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.csprojAssemblyReference.cache
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.Form1.resources
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.Properties.Resources.resources
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.csproj.GenerateResource.cache
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\winformOpenCV.exe.config
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\winformOpenCV.exe
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\winformOpenCV.pdb
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\OpenCvSharp.Blob.dll
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\OpenCvSharp.dll
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\OpenCvSharp.Extensions.dll
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\OpenCvSharp.xml
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\OpenCvSharp.Blob.xml
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\bin\Debug\OpenCvSharp.Extensions.xml
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.csproj.CopyComplete
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.exe
+C:\Users\soull\Desktop\backup\winformOpenCV\winformOpenCV\obj\Debug\winformOpenCV.pdb
