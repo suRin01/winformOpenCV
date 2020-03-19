@@ -21,8 +21,6 @@ namespace winformOpenCV
         private Thread cameraThread;
         Mat frame;
         int selectedCameraIndex = 0;
-        int isCameraRunning = 0;
-        int isRecRunning = 0;
         
 
         
@@ -84,7 +82,7 @@ namespace winformOpenCV
             Bitmap image;
             capture.Open(selectedCameraIndex);
 
-            while (isCameraRunning == 1)
+            while (capture.IsOpened())
             {
                 capture.Read(frame);
                 if (!frame.Empty())
@@ -92,7 +90,7 @@ namespace winformOpenCV
                     image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(frame);
                     pictureBox1.Image = image;
                 }
-                if(isRecRunning == 1)
+                if(writer.IsOpened())
                 {
                     writer.Write(frame);
                 }
@@ -106,14 +104,9 @@ namespace winformOpenCV
 
             if (button1.Text.Equals("Start"))
             {
-                if (capture.IsOpened())
-                {
-                    capture.Dispose();
-                }
                 selectedCameraIndex = cameraList.SelectedIndex;
                 CaptureCamera();
                 button1.Text = "Stop";
-                isCameraRunning = 1;
             }
             else
             {
@@ -123,7 +116,6 @@ namespace winformOpenCV
                 }
 
                 button1.Text = "Start";
-                isCameraRunning = 0;
             }
         }
 
@@ -141,7 +133,6 @@ namespace winformOpenCV
                 double fps = 20.0;
                 writer.Open(fileName, codec, fps, frame.Size(), true);
                 REC.Text = "REC stop";
-                isRecRunning = 1;
             }
             else
             {
@@ -151,7 +142,6 @@ namespace winformOpenCV
                 }
 
                 REC.Text = "REC start";
-                isRecRunning = 0;
             }
         }
     }
