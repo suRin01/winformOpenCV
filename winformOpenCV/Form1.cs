@@ -16,16 +16,11 @@ namespace winformOpenCV
 {
     public partial class Form1 : Form
     {
-        VideoCapture capture;
+        VideoCapture capture = new VideoCapture();
+        VideoWriter writer = new VideoWriter();
+        private Thread cameraThread;
         Mat frame;
-        Bitmap image;
-        private Thread camera;
-        int isCameraRunning = 0;
-        int isRecRunning = 0;
-        OpenCvSharp.VideoWriter writer = new OpenCvSharp.VideoWriter();
-        int codec = OpenCvSharp.VideoWriter.FourCC('M', 'J', 'P', 'G');
-        double fps = 20.0;
-        string filename = "./live.avi";
+        int selectedCameraIndex = 0;
         
 
         
@@ -36,59 +31,58 @@ namespace winformOpenCV
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             FilterInfoCollection FilterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo filterInfo in FilterInfoCollection)
                 cameraList.Items.Add(filterInfo.Name);
             cameraList.SelectedIndex = 0;
         }
-        public string GetDateTime()//시간 데이터 저장함수
-
+        private void Form1_FormClosing(object sender, EventArgs e)
         {
-            DateTime NowDate = DateTime.Now;
-            return NowDate.ToString("yyyy-MM-dd HH:mm:ss") + ":" + NowDate.Millisecond.ToString("000");
-        }
-        public void stopCamera(VideoCapture cam, VideoWriter videoWriter)
-        {
-            if (cam.IsOpened())
-            {
-                cam.Release();
-                if (camera.IsAlive)
-                {
-                    camera.Abort();
-                    camera.Join();
-                }
-                videoWriter.Release();
-            }
-
+            stopCamera();
         }
         public void startCamera(VideoCapture cam, int cameraIndex)
         {
             if (cam.IsDisposed)
             {
                 cam.Release();
-                
+                cameraThread = new Thread(CaptureCameraCallback);
+                cameraThread.Start();
+
             }
+        }
+        public void stopCamera()
+        {
+            if (capture.IsOpened())
+            {
+                capture.Release();
+                if (cameraThread.IsAlive)
+                {
+                    cameraThread.Abort();
+                    cameraThread.Join();
+                }
+                writer.Release();
+            }
+            if (writer.IsOpened())
+            {
+                writer.Release();
+            }
+
         }
 
         private void CaptureCamera()
         {
 
-            camera = new Thread(new ThreadStart(CaptureCameraCallback));
-            camera.Start();
-        }
-        private void Form1_FormClosing(object sender, EventArgs e)
-        {
-            stopCamera(capture, writer);
+            cameraThread = new Thread(new ThreadStart(CaptureCameraCallback));
+            cameraThread.Start();
         }
 
         private void CaptureCameraCallback()
         {
             frame = new Mat();
-            capture = new VideoCapture();
-            capture.Open(0);
+            Bitmap image;
+            capture.Open(selectedCameraIndex);
 
-            while (isCameraRunning == 1)
+            while (capture.IsOpened())
             {
                 capture.Read(frame);
                 if (!frame.Empty())
@@ -96,7 +90,7 @@ namespace winformOpenCV
                     image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(frame);
                     pictureBox1.Image = image;
                 }
-                if(isRecRunning == 1)
+                if(writer.IsOpened())
                 {
                     writer.Write(frame);
                 }
@@ -105,13 +99,14 @@ namespace winformOpenCV
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CaptureDeviceConnectButton_Click(object sender, EventArgs e)
         {
+
             if (button1.Text.Equals("Start"))
             {
+                selectedCameraIndex = cameraList.SelectedIndex;
                 CaptureCamera();
                 button1.Text = "Stop";
-                isCameraRunning = 1;
             }
             else
             {
@@ -121,7 +116,6 @@ namespace winformOpenCV
                 }
 
                 button1.Text = "Start";
-                isCameraRunning = 0;
             }
         }
 
@@ -134,27 +128,21 @@ namespace winformOpenCV
                 {
                     System.IO.Directory.CreateDirectory(recSaveTargetDirectory);
                 }
-                string fileName = recSaveTargetDirectory + "/" + "rec.avi";
-                REC.Text = "REC stop";
-                isRecRunning = 1;
+                string fileName = recSaveTargetDirectory + "/" + DateTime.Now.ToString("HHmmss") + "Rec.avi";
+                int codec = VideoWriter.FourCC('M', 'J', 'P', 'G');
+                double fps = 20.0;
                 writer.Open(fileName, codec, fps, frame.Size(), true);
+                REC.Text = "REC stop";
             }
             else
             {
-                if (capture.IsOpened())
+                if (writer.IsOpened())
                 {
-                    capture.Release();
                     writer.Release();
                 }
 
                 REC.Text = "REC start";
-                isRecRunning = 0;
             }
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
