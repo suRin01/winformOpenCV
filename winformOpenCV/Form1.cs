@@ -54,6 +54,7 @@ namespace winformOpenCV
         private void Form1_FormClosing(object sender, EventArgs e)
         {
             stopCamera();
+            file.Dispose();
         }
 
         //Dealing sercial IO Interupt 
