@@ -81,7 +81,7 @@ namespace winformOpenCV
 
         private void display_data(string str)
         {
-            this.serialBox.AppendText(str);
+            this.serialBox.AppendText(str+"\r\n");
             file.WriteLine(str);
         }
 
