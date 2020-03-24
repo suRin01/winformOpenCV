@@ -41,6 +41,7 @@
             this.loggingTargetDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.REC = new System.Windows.Forms.Button();
             this.serialBox = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,20 +49,18 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(370, 116);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(324, 93);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(624, 514);
+            this.pictureBox1.Size = new System.Drawing.Size(546, 412);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.button1.Location = new System.Drawing.Point(722, 76);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Location = new System.Drawing.Point(632, 61);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 28);
+            this.button1.Size = new System.Drawing.Size(116, 22);
             this.button1.TabIndex = 1;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,17 +70,16 @@
             // 
             this.cameraList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.cameraList.FormattingEnabled = true;
-            this.cameraList.Location = new System.Drawing.Point(370, 76);
-            this.cameraList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cameraList.Location = new System.Drawing.Point(324, 61);
             this.cameraList.Name = "cameraList";
-            this.cameraList.Size = new System.Drawing.Size(345, 23);
+            this.cameraList.Size = new System.Drawing.Size(302, 23);
             this.cameraList.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label1.Location = new System.Drawing.Point(366, 29);
+            this.label1.Location = new System.Drawing.Point(320, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 25);
             this.label1.TabIndex = 4;
@@ -90,17 +88,16 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(10, 79);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBox2.Location = new System.Drawing.Point(9, 63);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(210, 23);
+            this.comboBox2.Size = new System.Drawing.Size(184, 20);
             this.comboBox2.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label2.Location = new System.Drawing.Point(6, 29);
+            this.label2.Location = new System.Drawing.Point(5, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 25);
             this.label2.TabIndex = 4;
@@ -109,10 +106,9 @@
             // connectSerial
             // 
             this.connectSerial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.connectSerial.Location = new System.Drawing.Point(227, 76);
-            this.connectSerial.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.connectSerial.Location = new System.Drawing.Point(199, 61);
             this.connectSerial.Name = "connectSerial";
-            this.connectSerial.Size = new System.Drawing.Size(133, 29);
+            this.connectSerial.Size = new System.Drawing.Size(116, 23);
             this.connectSerial.TabIndex = 8;
             this.connectSerial.Text = "Connect";
             this.connectSerial.UseVisualStyleBackColor = true;
@@ -120,10 +116,9 @@
             // REC
             // 
             this.REC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.REC.Location = new System.Drawing.Point(862, 76);
-            this.REC.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.REC.Location = new System.Drawing.Point(754, 61);
             this.REC.Name = "REC";
-            this.REC.Size = new System.Drawing.Size(133, 26);
+            this.REC.Size = new System.Drawing.Size(116, 21);
             this.REC.TabIndex = 2;
             this.REC.Text = "REC start";
             this.REC.UseVisualStyleBackColor = true;
@@ -131,17 +126,29 @@
             // 
             // serialBox
             // 
-            this.serialBox.Location = new System.Drawing.Point(10, 116);
+            this.serialBox.Location = new System.Drawing.Point(9, 93);
+            this.serialBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.serialBox.Multiline = true;
             this.serialBox.Name = "serialBox";
-            this.serialBox.Size = new System.Drawing.Size(350, 513);
+            this.serialBox.Size = new System.Drawing.Size(307, 411);
             this.serialBox.TabIndex = 9;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(215, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 641);
+            this.ClientSize = new System.Drawing.Size(880, 513);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.serialBox);
             this.Controls.Add(this.connectSerial);
             this.Controls.Add(this.comboBox2);
@@ -151,7 +158,6 @@
             this.Controls.Add(this.REC);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "3D Printer Remote Management Program v0.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -176,6 +182,7 @@
         private System.Windows.Forms.FolderBrowserDialog loggingTargetDirectory;
         private System.Windows.Forms.Button REC;
         private System.Windows.Forms.TextBox serialBox;
+        private System.Windows.Forms.Button button2;
     }
 }
 

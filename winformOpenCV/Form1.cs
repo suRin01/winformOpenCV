@@ -12,6 +12,7 @@ using OpenCvSharp;
 using Accord.Video.DirectShow;
 using System.IO.Ports;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace winformOpenCV
 {
@@ -187,6 +188,11 @@ namespace winformOpenCV
 
                 REC.Text = "REC start";
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            display_data("hello world!");
         }
     }
 }
