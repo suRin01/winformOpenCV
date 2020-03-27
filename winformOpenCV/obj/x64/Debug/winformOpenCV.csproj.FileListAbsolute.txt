@@ -95,3 +95,5 @@ D:\Dev\CS\winformOpenCV\winformOpenCV\obj\x64\Debug\winformOpenCV.csproj.Generat
 D:\Dev\CS\winformOpenCV\winformOpenCV\obj\x64\Debug\winformOpenCV.csproj.CopyComplete
 D:\Dev\CS\winformOpenCV\winformOpenCV\obj\x64\Debug\winformOpenCV.exe
 D:\Dev\CS\winformOpenCV\winformOpenCV\obj\x64\Debug\winformOpenCV.pdb
+C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\MetroFramework.dll
+C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\MetroFramework.Fonts.dll

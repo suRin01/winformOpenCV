@@ -42,19 +42,31 @@ namespace winformOpenCV
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FilterInfoCollection FilterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo filterInfo in FilterInfoCollection)
-                cameraList.Items.Add(filterInfo.Name);
-            cameraList.SelectedIndex = 0;
+            if (!capture.Open(0))
+            {
+                MessageBox.Show("No cpature device");
+                this.Close();
+            }
+            else
+            {
+                FilterInfoCollection FilterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                foreach (FilterInfo filterInfo in FilterInfoCollection)
+                    cameraList.Items.Add(filterInfo.Name);
+                cameraList.SelectedIndex = 0;
 
 
-            file = new System.IO.StreamWriter(initLogPath());
-            my_serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
+                file = new System.IO.StreamWriter(initLogPath());
+                my_serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
+
+            }
         }
         private void Form1_FormClosing(object sender, EventArgs e)
         {
             stopCamera();
-            file.Dispose();
+            if(file != null)
+            {
+                file.Dispose();
+            }
         }
 
         //Dealing sercial IO Interupt 
