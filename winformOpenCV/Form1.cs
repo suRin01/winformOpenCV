@@ -159,7 +159,6 @@ namespace winformOpenCV
 
         private void CaptureDeviceConnectButton_Click(object sender, EventArgs e)
         {
-
             if (button1.Text.Equals("Start"))
             {
                 selectedCameraIndex = cameraList.SelectedIndex;
@@ -171,6 +170,7 @@ namespace winformOpenCV
                 if (capture.IsOpened())
                 {
                     capture.Release();
+                    stopCamera();
                 }
 
                 button1.Text = "Start";
