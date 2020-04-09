@@ -97,3 +97,7 @@ D:\Dev\CS\winformOpenCV\winformOpenCV\obj\x64\Debug\winformOpenCV.exe
 D:\Dev\CS\winformOpenCV\winformOpenCV\obj\x64\Debug\winformOpenCV.pdb
 C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\MetroFramework.dll
 C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\MetroFramework.Fonts.dll
+C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\suRin\Desktop\winformOpenCV\winformOpenCV\bin\x64\Debug\Microsoft.WindowsAPICodePack.Shell.xml

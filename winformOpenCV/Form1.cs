@@ -13,6 +13,7 @@ using Accord.Video.DirectShow;
 using System.IO.Ports;
 using System.Runtime.CompilerServices;
 using System.IO;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace winformOpenCV
 {
@@ -20,7 +21,7 @@ namespace winformOpenCV
     {
         //Variable for logger
         System.IO.StreamWriter file;
-    
+
         //Variable for OpenCV
         VideoCapture capture = new VideoCapture();
         VideoWriter writer = new VideoWriter();
@@ -31,8 +32,6 @@ namespace winformOpenCV
         //Variable for Serial IO
         SerialPort my_serial = new SerialPort();        // 시리얼 포트 변수 생성
         delegate void SetTextCallBack(string str);      // Callback 함수
-
-
 
         //Form construction, onLoad, destruction 
         public Form1()
@@ -49,13 +48,15 @@ namespace winformOpenCV
             }
             else
             {
+                selectedFolderText.Text = AppDomain.CurrentDomain.BaseDirectory;
+
                 FilterInfoCollection FilterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
                 foreach (FilterInfo filterInfo in FilterInfoCollection)
                     cameraList.Items.Add(filterInfo.Name);
                 cameraList.SelectedIndex = 0;
 
 
-                file = new System.IO.StreamWriter(initLogPath());
+
                 my_serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
 
             }
@@ -63,21 +64,16 @@ namespace winformOpenCV
         private void Form1_FormClosing(object sender, EventArgs e)
         {
             stopCamera();
-            if(file != null)
+            if (file != null)
             {
                 file.Dispose();
             }
         }
 
         //Dealing sercial IO Interupt 
-        private string initLogPath()
+        private string initPath()
         {
-            string recSaveTargetDirectory = @"./Log/" + DateTime.Now.ToString("yyyy-MM-dd");
-            if (!System.IO.File.Exists(recSaveTargetDirectory))
-            {
-                System.IO.Directory.CreateDirectory(recSaveTargetDirectory);
-            }
-            return recSaveTargetDirectory + "/" + DateTime.Now.ToString("HHmmss") + ".log";
+            return selectedFolderText.Text + "/" + DateTime.Now.ToString("yyyy-MM-dd-HHmmss");
         }
 
         private void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -93,8 +89,14 @@ namespace winformOpenCV
 
         private void display_data(string str)
         {
-            this.serialBox.AppendText(str+"\r\n");
+            this.serialBox.AppendText(str + "\r\n");
+            if (file == null)
+            {
+                file = new System.IO.StreamWriter(initPath() + ".log");
+            }
             file.WriteLine(str);
+            serialBox.SelectionStart = serialBox.Text.Length;
+            serialBox.ScrollToCaret();
         }
 
         //Dealing Camera Data
@@ -113,7 +115,7 @@ namespace winformOpenCV
             if (capture.IsOpened())
             {
                 capture.Release();
-                if (cameraThread.IsAlive)
+                if (cameraThread != null && cameraThread.IsAlive)
                 {
                     cameraThread.Abort();
                     cameraThread.Join();
@@ -148,11 +150,10 @@ namespace winformOpenCV
                     image = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(frame);
                     pictureBox1.Image = image;
                 }
-                if(writer.IsOpened())
+                if (writer.IsOpened())
                 {
                     writer.Write(frame);
                 }
-                image = null;
             }
 
         }
@@ -181,12 +182,12 @@ namespace winformOpenCV
         {
             if (REC.Text.Equals("REC start"))
             {
-                string recSaveTargetDirectory = @"./REC/" + DateTime.Now.ToString("yyyy-MM-dd");
-                if (!System.IO.File.Exists(recSaveTargetDirectory))
-                {
-                    System.IO.Directory.CreateDirectory(recSaveTargetDirectory);
-                }
-                string fileName = recSaveTargetDirectory + "/" + DateTime.Now.ToString("HHmmss") + "Rec.avi";
+                //string recSaveTargetDirectory = @"./REC/" + DateTime.Now.ToString("yyyy-MM-dd");
+                //if (!System.IO.File.Exists(recSaveTargetDirectory))
+                //{
+                //    System.IO.Directory.CreateDirectory(recSaveTargetDirectory);
+                //}
+                string fileName = initPath() + "Rec.avi";
                 int codec = VideoWriter.FourCC('M', 'J', 'P', 'G');
                 double fps = 20.0;
                 writer.Open(fileName, codec, fps, frame.Size(), true);
@@ -203,9 +204,54 @@ namespace winformOpenCV
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+        private void folderSelectorButton_Click(object sender, EventArgs e)
         {
-            display_data("hello world!");
+            CommonOpenFileDialog folderSector = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true
+            };
+            if (folderSector.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                selectedFolderText.Text = folderSector.FileName;
+            }
+
+        }
+
+        private void connectSerial_Click(object sender, EventArgs e)
+        {
+            if (my_serial.IsOpen)
+            {
+                my_serial.Close();
+            }
+            file = new System.IO.StreamWriter(initPath() + ".log");
+            byte[] serial_send_data = new byte[8];
+            string comport_str = "";
+            if (serialDeviceList.Text != "")
+            {
+                my_serial.PortName = serialDeviceList.Text;
+                comport_str = serialDeviceList.Text;
+                my_serial.BaudRate = 115200;
+
+                try
+                {
+                    my_serial.Open();
+                    comport_str += "  " + "is Open !!";
+                    serialBox.Text += comport_str + "\r\n";
+                }
+                catch
+                {
+                    MessageBox.Show("SEIRAL PORT CONNECTION FAIL |!");
+                }
+            }
+        }
+
+        private void stopPrinterButton_Click(object sender, EventArgs e)
+        {
+            if (my_serial.IsOpen)
+            {
+                my_serial.Write("M1");
+            }
         }
     }
 }
